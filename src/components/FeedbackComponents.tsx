@@ -8,6 +8,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Badge } from '@/components/ui/badge'
 import { Skeleton } from '@/components/ui/skeleton'
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
 import { toast } from 'sonner'
 import { 
   AlertCircle, 
@@ -454,18 +455,42 @@ export function FeedbackComponents() {
           <div className="space-y-3">
             <h4 className="text-sm font-medium text-foreground">Tooltip Examples</h4>
             <p className="text-sm text-foreground-secondary">
-              Note: Tooltips require the TooltipProvider to wrap your app. These are placeholder examples.
+              Hover over the buttons below to see tooltips in action.
             </p>
             <div className="flex flex-wrap gap-2">
-              <Button variant="outline" size="sm">
-                Hover for tooltip
-              </Button>
-              <Button variant="outline" size="sm">
-                <Edit className="h-4 w-4" />
-              </Button>
-              <Button variant="outline" size="sm">
-                <Info className="h-4 w-4" />
-              </Button>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button variant="outline" size="sm">
+                    Hover for tooltip
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>This is a simple tooltip</p>
+                </TooltipContent>
+              </Tooltip>
+
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button variant="ghost" size="icon">
+                    <Info className="h-4 w-4" />
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Information about the icon</p>
+                </TooltipContent>
+              </Tooltip>
+
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button variant="secondary" size="sm">
+                    <Edit className="h-4 w-4 mr-2" />
+                    Edit Profile
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Click to edit your profile settings</p>
+                </TooltipContent>
+              </Tooltip>
             </div>
           </div>
         </CardContent>
