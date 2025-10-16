@@ -1,0 +1,120 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  /* ===== DESIGN TOKENS - CUSTOMIZE THESE VALUES ===== */
+  
+  /* Primary Brand Colors */
+  --color-primary: #1ca8e1;
+  --color-primary-foreground: #ffffff;
+  
+  /* Secondary Colors */
+  --color-secondary: #646e78;
+  --color-secondary-foreground: #ffffff;
+  
+  /* Background Colors */
+  --color-background: #ffffff;
+  --color-foreground: #000000;
+  --color-muted: #f9fafb;
+  --color-muted-foreground: #646e78;
+  
+  /* Border & Input Colors */
+  --color-border: #d9d9d9;
+  --color-input: #d9d9d9;
+  --color-ring: #1ca8e1;
+  
+  /* Card & Popover Colors */
+  --color-card: #ffffff;
+  --color-card-foreground: #000000;
+  --color-popover: #ffffff;
+  --color-popover-foreground: #000000;
+  
+  /* Semantic Colors */
+  --color-success: #5cb85c;
+  --color-error: #e13d3d;
+  --color-warning: #ffc107;
+  --color-info: #17a2b8;
+  
+  /* Destructive Colors */
+  --color-destructive: #e13d3d;
+  --color-destructive-foreground: #ffffff;
+  
+  /* Accent Colors */
+  --color-accent: #f2f2f2;
+  --color-accent-foreground: #000000;
+  
+  /* Border Radius */
+  --radius: 10px;
+  --radius-sm: 8px;
+  --radius-md: 10px;
+  --radius-lg: 24px;
+  
+  /* Font Family */
+  --font-family-sans: "Poppins", ui-sans-serif, system-ui, sans-serif;
+}
+
+/* ===== DARK MODE - CUSTOMIZE THESE VALUES ===== */
+.dark {
+  /* Primary Brand Colors - Dark Mode */
+  --color-primary: #6fcaee;
+  --color-primary-foreground: #000000;
+  
+  /* Secondary Colors - Dark Mode */
+  --color-secondary: #aab4be;
+  --color-secondary-foreground: #000000;
+  
+  /* Background Colors - Dark Mode */
+  --color-background: #121212;
+  --color-foreground: #ffffff;
+  --color-muted: #1e1e1e;
+  --color-muted-foreground: #aab4be;
+  
+  /* Border & Input Colors - Dark Mode */
+  --color-border: #2e2e2e;
+  --color-input: #2e2e2e;
+  --color-ring: #6fcaee;
+  
+  /* Card & Popover Colors - Dark Mode */
+  --color-card: #121212;
+  --color-card-foreground: #ffffff;
+  --color-popover: #121212;
+  --color-popover-foreground: #ffffff;
+  
+  /* Semantic Colors - Dark Mode */
+  --color-success: #4caf50;
+  --color-error: #f44336;
+  --color-warning: #ffc107;
+  --color-info: #03a9f4;
+  
+  /* Destructive Colors - Dark Mode */
+  --color-destructive: #f44336;
+  --color-destructive-foreground: #ffffff;
+  
+  /* Accent Colors - Dark Mode */
+  --color-accent: #2c2c2c;
+  --color-accent-foreground: #ffffff;
+}
+
+/* ===== BASE STYLES ===== */
+* {
+  border-color: var(--color-border);
+  font-family: var(--font-family-sans);
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-family-sans);
+}
+
+/* ===== CUSTOM ALERT COLORS ===== */
+.text-success { color: var(--color-success) !important; }
+.border-success { border-color: var(--color-success) !important; }
+.text-warning { color: var(--color-warning) !important; }
+.border-warning { border-color: var(--color-warning) !important; }
+.text-info { color: var(--color-info) !important; }
+.border-info { border-color: var(--color-info) !important; }
+.text-error { color: var(--color-error) !important; }
+.border-error { border-color: var(--color-error) !important; }

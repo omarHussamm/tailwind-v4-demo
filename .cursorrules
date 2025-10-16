@@ -1,0 +1,398 @@
+# Tailwind CSS v4 + shadcn/ui Demo Project Rules
+
+## Project Overview
+This is a comprehensive component showcase project featuring Tailwind CSS v4.1.14 with shadcn/ui components. The project is organized into 6 dedicated showcase pages, each focusing on related component categories with full documentation links and CSS variable mapping for easy designer reference.
+
+## Core Technologies
+- **Tailwind CSS v4.1.14** - Latest version with CSS-first configuration
+- **shadcn/ui** - High-quality React components with "new-york" style
+- **React 18** with TypeScript
+- **Vite** - Build tool and development server
+- **Radix UI** - Accessible component primitives
+
+## Configuration Files
+- `src/style.css` - Main stylesheet with Tailwind v4 @theme configuration
+- `components.json` - shadcn/ui configuration
+- `vite.config.ts` - Vite with Tailwind v4 plugin and path aliases
+- `tsconfig.json` - TypeScript with JSX and path mapping
+- `export.json` - Design tokens from Figma (if present)
+
+## Design System Rules
+
+### Color System
+- Use `oklch()` color space for all colors (better perceptual uniformity)
+- Light theme is the default, dark mode via `.dark` class
+- Semantic color names: `background`, `foreground`, `primary`, `secondary`, `muted`, `accent`, `destructive`
+- Never use hardcoded hex colors - always use CSS variables
+
+### CSS Variables Structure
+```css
+@theme {
+  /* Primary Colors - Used by: Button, Badge, Link, Progress, Switch, Checkbox, Radio */
+  --color-primary: #1ca8e1;
+  --color-primary-foreground: #ffffff;
+  
+  /* Semantic Colors - Used by: Alert, Badge, Progress, Status indicators */
+  --color-success: #5cb85c;
+  --color-error: #e13d3d;
+  --color-warning: #ffc107;
+  --color-info: #17a2b8;
+  
+  /* Border and Input - Used by: Input, Select, Textarea, Card, Table, Separator */
+  --color-border: #d9d9d9;
+  --color-input: #d9d9d9;
+  --color-ring: #1ca8e1;
+}
+```
+
+### Dark Mode Implementation
+- Use `.dark` class on root element, not `@media` queries
+- Dark mode variables override light theme variables
+- Always test both light and dark modes
+
+## Component Development Rules
+
+### Component Showcase Structure
+- **6 dedicated showcase pages** organized by component category
+- Each component section includes:
+  - All variants and states (sizes, colors, disabled, etc.)
+  - shadcn/ui documentation links
+  - Tailwind CSS v4 documentation links
+  - CSS variable mapping for easy designer reference
+  - Interactive examples with proper state management
+
+### shadcn/ui Components
+- Use existing components from `src/components/ui/`
+- Follow shadcn/ui patterns for variants and styling
+- Use `cn()` utility for conditional classes
+- Import from `@/components/ui/` using path aliases
+- Showcase all available variants and states for each component
+
+### Component Structure
+```tsx
+import { cn } from "@/lib/utils"
+import { Button } from "@/components/ui/button"
+
+// Use proper TypeScript types
+interface ComponentProps {
+  className?: string
+  variant?: "default" | "secondary" | "destructive"
+}
+
+// Use cn() for conditional styling
+const Component = ({ className, variant = "default", ...props }: ComponentProps) => {
+  return (
+    <Button 
+      className={cn("base-styles", variant === "secondary" && "secondary-styles", className)}
+      {...props}
+    />
+  )
+}
+```
+
+### Styling Guidelines
+- Use Tailwind utility classes for layout and spacing
+- Use CSS variables for colors and design tokens
+- Prefer semantic class names over arbitrary values
+- Use responsive prefixes: `sm:`, `md:`, `lg:`, `xl:`, `2xl:`
+
+## File Organization
+
+### Directory Structure
+```
+src/
+├── components/
+│   ├── ui/                    # shadcn/ui components
+│   ├── ComponentsLayout.tsx   # Main layout with sidebar navigation
+│   ├── BasicComponents.tsx    # Button, Badge, Avatar, Separator
+│   ├── FormComponents.tsx     # Input, Label, Checkbox, Radio, Switch, Select
+│   ├── FeedbackComponents.tsx # Alert, Dialog, Toast, Tooltip, Skeleton
+│   ├── NavigationComponents.tsx # Tabs, Breadcrumb, Navigation Menu, Sidebar
+│   ├── DataComponents.tsx     # Table, Card, Accordion, Empty State
+│   └── AdvancedComponents.tsx # Dropdown Menu, Popover, Typography, Chart
+├── lib/
+│   └── utils.ts               # Utility functions (cn, etc.)
+├── App.tsx                    # Main application with routing
+├── main.tsx                   # Application entry point
+└── style.css                  # Global styles and design tokens with component mapping
+```
+
+### Import Patterns
+- Use path aliases: `@/components`, `@/lib`, `@/hooks`
+- Group imports: React first, then third-party, then local
+- Use named imports for better tree-shaking
+
+## Development Workflow
+
+### Before Making Changes
+1. Check if Tailwind v4 configuration is correct
+2. Verify shadcn/ui components are up to date
+3. Ensure design tokens match Figma specifications
+4. Test both light and dark modes
+
+### Code Quality Standards
+- Use TypeScript strict mode
+- Write descriptive component and function names
+- Add proper TypeScript types for all props
+- Use semantic HTML elements
+- Ensure accessibility compliance
+
+### Testing Requirements
+- Test all interactive components
+- Verify responsive behavior
+- Check color contrast ratios
+- Validate keyboard navigation
+- Test with screen readers
+
+## Tailwind CSS v4 Specific Rules
+
+### Configuration
+- No `tailwind.config.js` file needed
+- All configuration in CSS using `@theme` directive
+- Use `@import "tailwindcss"` at the top of CSS file
+- Define custom properties in `@theme` block
+
+### Best Practices
+- Use `theme()` function to reference CSS variables
+- Prefer CSS variables over arbitrary values
+- Use modern color spaces (oklch, lab, p3)
+- Leverage container queries when appropriate
+
+### Performance
+- Use `@layer` directive for custom styles
+- Minimize custom CSS in favor of utilities
+- Use `@apply` sparingly and only for complex patterns
+- Optimize for CSS bundle size
+
+## shadcn/ui Specific Rules
+
+### Component Installation
+- Use CLI: `npx shadcn@latest add [component]`
+- Follow components.json configuration
+- Use "new-york" style (default is deprecated)
+- Enable CSS variables for theming
+
+### Styling Components
+- Use `cva` (class-variance-authority) for variants
+- Use `cn()` utility for conditional classes
+- Follow shadcn/ui naming conventions
+- Use Radix UI primitives as base
+
+### Theming
+- Use CSS variables for all colors
+- Follow semantic color naming
+- Support both light and dark modes
+- Use consistent spacing scale
+
+## Design Token Integration
+
+### Figma Integration
+- Use `export.json` for design tokens from Figma
+- Map Figma tokens to CSS variables
+- Maintain consistency between design and code
+- Update tokens when designs change
+
+### Token Structure
+```json
+{
+  "colors": {
+    "primary": {
+      "50": "oklch(98% 0.002 285.82)",
+      "500": "oklch(9% 0.005 285.82)",
+      "900": "oklch(2% 0.01 285.82)"
+    }
+  },
+  "spacing": {
+    "xs": "0.25rem",
+    "sm": "0.5rem",
+    "md": "1rem"
+  }
+}
+```
+
+## Error Handling and Debugging
+
+### Common Issues
+- CSS variables not updating: Check `@theme` configuration
+- Dark mode not working: Verify `.dark` class application
+- Components not styling: Check shadcn/ui installation
+- Build errors: Verify TypeScript and Vite configuration
+
+### Debugging Tools
+- Use browser dev tools to inspect CSS variables
+- Check computed styles for color values
+- Verify Tailwind classes are being applied
+- Use React DevTools for component debugging
+
+## Performance Optimization
+
+### Bundle Size
+- Use tree-shaking friendly imports
+- Minimize custom CSS
+- Use Tailwind's purge functionality
+- Optimize images and assets
+
+### Runtime Performance
+- Use React.memo for expensive components
+- Implement proper key props for lists
+- Avoid inline styles and functions in JSX
+- Use CSS variables for dynamic theming
+
+## Accessibility Standards
+
+### WCAG Compliance
+- Ensure proper color contrast ratios
+- Use semantic HTML elements
+- Implement keyboard navigation
+- Provide screen reader support
+- Use proper ARIA attributes
+
+### Testing
+- Test with keyboard-only navigation
+- Verify screen reader compatibility
+- Check color contrast ratios
+- Validate form accessibility
+
+## Documentation Standards
+
+### Code Comments
+- Document complex CSS custom properties
+- Explain non-obvious Tailwind class combinations
+- Document component prop interfaces
+- Add JSDoc comments for utility functions
+
+### README Updates
+- Keep installation instructions current
+- Document any custom configurations
+- Include troubleshooting section
+- Update component examples
+
+## Git Workflow
+
+### Commit Messages
+- Use conventional commits format
+- Include component or feature name
+- Describe changes clearly
+- Reference issues when applicable
+
+### Branch Naming
+- Use descriptive branch names
+- Include component or feature type
+- Use kebab-case for branch names
+- Keep branches focused on single features
+
+## Deployment Considerations
+
+### Build Process
+- Ensure production build works
+- Test CSS bundle size
+- Verify all assets are included
+- Check for console errors
+
+### Environment Variables
+- Use environment-specific configurations
+- Document required environment variables
+- Use proper TypeScript types for env vars
+- Implement proper error handling
+
+## Maintenance Guidelines
+
+### Regular Updates
+- Keep dependencies up to date
+- Update Tailwind CSS to latest version
+- Update shadcn/ui components
+- Review and update design tokens
+
+### Code Review Checklist
+- [ ] TypeScript types are correct
+- [ ] Components follow shadcn/ui patterns
+- [ ] CSS variables are properly defined
+- [ ] Both light and dark modes work
+- [ ] Accessibility standards are met
+- [ ] Performance is optimized
+- [ ] Code is properly documented
+
+## Troubleshooting Guide
+
+### Common Problems
+1. **CSS variables not working**: Check `@theme` configuration and variable names
+2. **Dark mode not switching**: Verify `.dark` class is applied to root element
+3. **Components not styled**: Ensure shadcn/ui is properly installed
+4. **Build errors**: Check TypeScript configuration and imports
+5. **Performance issues**: Review bundle size and optimize imports
+
+### Getting Help
+- Check Tailwind CSS v4 documentation
+- Review shadcn/ui component documentation
+- Use browser dev tools for debugging
+- Check console for error messages
+- Verify all dependencies are installed correctly
+
+## Component Showcase Pages
+
+### 1. Basic Components (`BasicComponents.tsx`)
+- **Button**: All variants (default, secondary, outline, ghost, destructive, link) + sizes + states
+- **Button Group**: Custom grouped button implementation
+- **Badge**: All variants + custom colors + with icons
+- **Avatar**: Different sizes + states + with user info
+- **Separator**: Horizontal and vertical orientations
+
+### 2. Form Components (`FormComponents.tsx`)
+- **Input**: All types (text, email, password, number) + states + with icons
+- **Label**: Basic labels + required indicators + with descriptions
+- **Checkbox**: All states (checked, unchecked, indeterminate, disabled)
+- **Radio Group**: Basic radio + with descriptions
+- **Switch**: On/off states + form examples
+- **Select**: Basic select + states + error handling
+- **Combobox**: Searchable select (placeholder implementation)
+
+### 3. Feedback Components (`FeedbackComponents.tsx`)
+- **Alert**: Info, warning, error, success variants + custom styles
+- **Alert Dialog**: Confirmation dialogs + different actions
+- **Dialog**: Basic modal + form dialogs
+- **Toast**: Notification examples (Sonner component)
+- **Tooltip**: Hover tooltips (placeholder examples)
+- **Spinner**: Loading indicators + button loading states
+- **Skeleton**: Basic skeletons + card skeletons + form skeletons
+
+### 4. Navigation Components (`NavigationComponents.tsx`)
+- **Tabs**: Basic tabs + vertical tabs
+- **Breadcrumb**: Basic breadcrumb + complex navigation
+- **Navigation Menu**: Top navigation with dropdowns
+- **Menubar**: Application menu bar
+- **Sidebar**: Collapsible sidebar (simplified example)
+- **Pagination**: Basic pagination + large pagination
+
+### 5. Data Components (`DataComponents.tsx`)
+- **Table**: Basic table + sortable table
+- **Data Table**: Advanced table with progress bars + actions
+- **Card**: Basic cards + with images + different layouts
+- **Accordion**: Basic accordion + FAQ accordion
+- **Empty State**: Custom empty state components
+
+### 6. Advanced Components (`AdvancedComponents.tsx`)
+- **Dropdown Menu**: Basic dropdown + user menu
+- **Popover**: Basic popover + contact info popover
+- **Typography**: Headings + body text + text styles + lists
+- **Chart**: Chart placeholders + controls + filters
+
+## Designer-Friendly Features
+
+### Documentation Links
+- Each component section includes direct links to:
+  - shadcn/ui component documentation
+  - Tailwind CSS v4 documentation
+- Links open in new tabs for easy reference
+
+### CSS Variable Mapping
+- All CSS variables in `style.css` include comments mapping them to specific components
+- Easy for designers to understand which variables control which component styles
+- Example: `/* Primary Colors - Used by: Button, Badge, Link, Progress, Switch, Checkbox, Radio */`
+
+### Interactive Examples
+- All components show real interactive states
+- Form components have working state management
+- Buttons, switches, and checkboxes are fully functional
+- Dialogs and popovers can be opened and closed
+
+Remember: This project serves as a comprehensive component showcase and design system reference. All configurations and patterns established here should be transferable to production projects.
