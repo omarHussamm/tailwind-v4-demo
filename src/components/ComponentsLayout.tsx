@@ -125,10 +125,10 @@ export function ComponentsLayout({ currentPage, onPageChange, children }: Compon
       <div className="flex">
         {/* Sidebar - Left Side with Collapse */}
         <aside className={`border-r bg-card min-h-screen transition-all duration-300 ${
-          isSidebarCollapsed ? 'w-12' : 'w-64'
+          isSidebarCollapsed ? 'w-16' : 'w-64'
         }`}>
-          <div className="p-4">
-            <div className="flex items-center justify-between mb-4">
+          <div className={`${isSidebarCollapsed ? 'p-2' : 'p-4'}`}>
+            <div className={`flex items-center ${isSidebarCollapsed ? 'justify-center mb-4' : 'justify-between mb-4'}`}>
               {!isSidebarCollapsed && (
                 <h2 className="text-lg font-semibold text-foreground">Components</h2>
               )}
@@ -155,14 +155,16 @@ export function ComponentsLayout({ currentPage, onPageChange, children }: Compon
                   <button
                     key={item.id}
                     onClick={() => onPageChange(item.id)}
-                    className={`w-full text-left p-2 rounded-md transition-colors ${
+                    className={`w-full text-left rounded-md transition-colors ${
+                      isSidebarCollapsed ? 'p-2 flex justify-center' : 'p-2'
+                    } ${
                       isActive
                         ? 'bg-primary text-primary-foreground'
                         : 'hover:bg-accent hover:text-accent-foreground'
                     }`}
                     title={isSidebarCollapsed ? item.title : undefined}
                   >
-                    <div className="flex items-center space-x-2">
+                    <div className={`flex items-center ${isSidebarCollapsed ? 'justify-center' : 'space-x-2'}`}>
                       <Icon className="h-4 w-4 flex-shrink-0" />
                       {!isSidebarCollapsed && (
                         <div className="text-sm font-medium">{item.title}</div>
